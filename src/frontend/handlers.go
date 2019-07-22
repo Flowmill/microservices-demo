@@ -43,6 +43,12 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
 	log.WithField("currency", currentCurrency(r)).Info("home")
 	currencies, err := fe.getCurrencies(r.Context())
+
+	// NOTE: This artificially injects failures in a fixed percentage of the responess
+	if (rand.Intn(100) < fe.errorRate) { 
+		renderHTTPError(log, r, w, errors.Wrap(err, "Random artificial 500 error"), http.StatusInternalServerError)
+		return
+	} 
 	if err != nil {
 		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve currencies"), http.StatusInternalServerError)
 		return
