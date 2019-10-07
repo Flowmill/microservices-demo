@@ -20,6 +20,7 @@ spec:
   selector:
     matchLabels:
       app: productcatalogservice
+  replicas: 2
   template:
     metadata:
       labels:
@@ -31,9 +32,13 @@ spec:
         image: productcatalogservice
         ports:
         - containerPort: 3550
+        securityContext:
+          privileged: true
         env:
         - name: PORT
           value: "3550"
+#        - name: EXTRA_LATENCY
+#          value: "500ms"
         readinessProbe:
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:3550"]
@@ -45,11 +50,11 @@ spec:
 #            value: "jaeger-collector:14268"
         resources:
           requests:
-            cpu: 100m
-            memory: 64Mi
-          limits:
             cpu: 200m
             memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
 ---
 apiVersion: v1
 kind: Service

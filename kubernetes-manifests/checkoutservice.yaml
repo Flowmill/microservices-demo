@@ -30,6 +30,8 @@ spec:
           image: checkoutservice
           ports:
           - containerPort: 5050
+          securityContext:
+            privileged: true
           readinessProbe:
             exec:
               command: ["/bin/grpc_health_probe", "-addr=:5050"]
@@ -55,11 +57,11 @@ spec:
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
               cpu: 200m
               memory: 128Mi
+            limits:
+              cpu: 400m
+              memory: 512Mi
 ---
 apiVersion: v1
 kind: Service

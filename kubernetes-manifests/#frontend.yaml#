@@ -20,7 +20,6 @@ spec:
   selector:
     matchLabels:
       app: frontend
-  replicas: 2
   template:
     metadata:
       labels:
@@ -64,11 +63,10 @@ spec:
             value: "checkoutservice:5050"
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
-          - name: HTTP_500_PERCENT
-            value: "20"
           # - name: JAEGER_SERVICE_ADDR
           #   value: "jaeger-collector:14268"
-          resources:
+          re
+sources:
             requests:
               cpu: 100m
               memory: 64Mi
