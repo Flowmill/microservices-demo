@@ -39,10 +39,10 @@ spec:
         resources:
           requests:
             cpu: 200m
-            memory: 180Mi
+            memory: 128Mi
           limits:
-            cpu: 600m
-            memory: 800Mi
+            cpu: 500m
+            memory: 500Mi
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15

@@ -20,6 +20,7 @@ spec:
   selector:
     matchLabels:
       app: recommendationservice
+  replicas: 1
   template:
     metadata:
       labels:
@@ -49,7 +50,7 @@ spec:
         resources:
           requests:
             cpu: 200m
-            memory: 500Mi
+            memory: 300Mi
           limits:
             cpu: 400m
             memory: 850Mi
