@@ -20,7 +20,7 @@ spec:
   selector:
     matchLabels:
       app: loadgenerator
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -46,11 +46,11 @@ spec:
         - name: FRONTEND_ADDR
           value: "frontend:80"
         - name: USERS
-          value: "75"
+          value: "50"
         resources:
           requests:
-            cpu: 300m
-            memory: 300Mi
+            cpu: 400m
+            memory: 400Mi
           limits:
-            cpu: 900m
+            cpu: 400m
             memory: 1024Mi
