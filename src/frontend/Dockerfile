@@ -14,7 +14,7 @@ RUN go install .
 
 FROM alpine as release
 RUN apk add --no-cache ca-certificates \
-    busybox-extras net-tools bind-tools
+    busybox-extras net-tools bind-tools iproute2
 WORKDIR /frontend
 COPY --from=builder /go/bin/frontend /frontend/server
 COPY ./templates ./templates

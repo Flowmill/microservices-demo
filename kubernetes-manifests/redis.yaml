@@ -25,6 +25,16 @@ spec:
       labels:
         app: redis-cart
     spec:
+      #affinity:
+        #podAntiAffinity:
+          #requiredDuringSchedulingIgnoredDuringExecution:
+          #- labelSelector:
+              #matchExpressions:
+              #- key: name
+                #operator: In
+                #values:
+                #- cartservice
+            #topologyKey: kubernetes.io/hostname
       containers:
       - name: redis
         image: redis:alpine

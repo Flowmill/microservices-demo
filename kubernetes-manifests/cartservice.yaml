@@ -33,18 +33,18 @@ spec:
         - containerPort: 7070
         env:
         - name: REDIS_ADDR
-#          value: "redis-cart:6379"
-          value: "prod-demo-redis.errki1.ng.0001.use1.cache.amazonaws.com:6379"
+          value: "redis-cart:6379"
+          #value: "prod-demo-redis.errki1.ng.0001.use1.cache.amazonaws.com:6379"  
         - name: PORT
           value: "7070"
         - name: LISTEN_ADDR
           value: "0.0.0.0"
         resources:
           requests:
-            cpu: 300m
-            memory: 256Mi
+            cpu: 400m
+            memory: 300Mi
           limits:
-            cpu: 300m
+            cpu: 500m
             memory: 500Mi
         readinessProbe:
           initialDelaySeconds: 15
@@ -52,7 +52,7 @@ spec:
             command: ["/bin/grpc_health_probe", "-addr=:7070"]
         livenessProbe:
           initialDelaySeconds: 15
-          periodSeconds: 10
+          periodSeconds: 20
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:7070"]
 ---

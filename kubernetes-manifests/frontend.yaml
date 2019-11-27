@@ -31,6 +31,8 @@ spec:
           image: frontend
           ports:
           - containerPort: 8080
+          securityContext:
+            privileged: true
           readinessProbe:
             initialDelaySeconds: 10
             httpGet:
@@ -65,7 +67,7 @@ spec:
           - name: AD_SERVICE_ADDR
             value: "adservice:9555"
           - name: HTTP_500_PERCENT
-            value: "0"
+            value: "15"
           # - name: JAEGER_SERVICE_ADDR
           #   value: "jaeger-collector:14268"
           resources:
