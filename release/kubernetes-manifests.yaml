@@ -55,7 +55,7 @@ spec:
             cpu: 100m
             memory: 64Mi
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 128Mi
 ---
 apiVersion: v1
@@ -123,7 +123,7 @@ spec:
               cpu: 100m
               memory: 64Mi
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 128Mi
 ---
 apiVersion: v1
@@ -179,10 +179,10 @@ spec:
         #   value: "1"
         resources:
           requests:
-            cpu: 100m
+            cpu: 300m
             memory: 220Mi
           limits:
-            cpu: 200m
+            cpu: 1000m
             memory: 450Mi
 ---
 apiVersion: v1
@@ -261,10 +261,10 @@ spec:
           #   value: "jaeger-collector:14268"
           resources:
             requests:
-              cpu: 100m
+              cpu: 300m
               memory: 64Mi
             limits:
-              cpu: 200m
+              cpu: 2000m
               memory: 128Mi
 ---
 apiVersion: v1
@@ -326,7 +326,7 @@ spec:
             cpu: 100m
             memory: 64Mi
           limits:
-            cpu: 200m
+            cpu: 1000m
             memory: 128Mi
 ---
 apiVersion: v1
@@ -383,7 +383,7 @@ spec:
             cpu: 100m
             memory: 64Mi
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 128Mi
 ---
 apiVersion: v1
@@ -430,7 +430,7 @@ spec:
             cpu: 200m
             memory: 64Mi
           limits:
-            cpu: 300m
+            cpu: 600m
             memory: 128Mi
         readinessProbe:
           initialDelaySeconds: 15
@@ -454,40 +454,6 @@ spec:
   - name: grpc
     port: 7070
     targetPort: 7070
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: loadgenerator
-spec:
-  selector:
-    matchLabels:
-      app: loadgenerator
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: loadgenerator
-      annotations:
-        sidecar.istio.io/rewriteAppHTTPProbers: "true"
-    spec:
-      terminationGracePeriodSeconds: 5
-      restartPolicy: Always
-      containers:
-      - name: main
-        image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.2.0
-        env:
-        - name: FRONTEND_ADDR
-          value: "frontend:80"
-        - name: USERS
-          value: "10"
-        resources:
-          requests:
-            cpu: 300m
-            memory: 256Mi
-          limits:
-            cpu: 500m
-            memory: 512Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -529,7 +495,7 @@ spec:
             cpu: 100m
             memory: 64Mi
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 128Mi
 ---
 apiVersion: v1
@@ -634,7 +600,7 @@ spec:
         resources:
           limits:
             memory: 256Mi
-            cpu: 125m
+            cpu: 500m
           requests:
             cpu: 70m
             memory: 200Mi
@@ -686,10 +652,10 @@ spec:
         resources:
           requests:
             cpu: 200m
-            memory: 180Mi
-          limits:
-            cpu: 300m
             memory: 300Mi
+          limits:
+            cpu: 600m
+            memory: 400Mi
         readinessProbe:
           initialDelaySeconds: 20
           periodSeconds: 15
